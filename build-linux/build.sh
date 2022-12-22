@@ -23,12 +23,12 @@ if [ "${CLASSICAL}" == "1" ]; then
 
   export PATH="${GODOT_SDK_LINUX_X86_64}/bin:${BASE_PATH}"
 
-  $SCONS platform=x11 $OPTIONS tools=yes target=release_debug
-  mkdir -p /root/out/x64/tools
-  cp -rvp bin/* /root/out/x64/tools
-  rm -rf bin
+  #$SCONS platform=x11 $OPTIONS tools=yes target=release_debug
+  #mkdir -p /root/out/x64/tools
+  #cp -rvp bin/* /root/out/x64/tools
+  #rm -rf bin
 
-  $SCONS platform=x11 $OPTIONS tools=no target=release_debug
+  #$SCONS platform=x11 $OPTIONS tools=no target=release_debug
   $SCONS platform=x11 $OPTIONS tools=no target=release
   mkdir -p /root/out/x64/templates
   cp -rvp bin/* /root/out/x64/templates
@@ -36,12 +36,12 @@ if [ "${CLASSICAL}" == "1" ]; then
 
   export PATH="${GODOT_SDK_LINUX_X86}/bin:${BASE_PATH}"
 
-  $SCONS platform=x11 $OPTIONS tools=yes target=release_debug bits=32
-  mkdir -p /root/out/x86/tools
-  cp -rvp bin/* /root/out/x86/tools
-  rm -rf bin
+  #$SCONS platform=x11 $OPTIONS tools=yes target=release_debug bits=32
+  #mkdir -p /root/out/x86/tools
+  #cp -rvp bin/* /root/out/x86/tools
+  #rm -rf bin
 
-  $SCONS platform=x11 $OPTIONS tools=no target=release_debug bits=32
+  #$SCONS platform=x11 $OPTIONS tools=no target=release_debug bits=32
   $SCONS platform=x11 $OPTIONS tools=no target=release bits=32
   mkdir -p /root/out/x86/templates
   cp -rvp bin/* /root/out/x86/templates

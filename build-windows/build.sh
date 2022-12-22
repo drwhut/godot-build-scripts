@@ -21,23 +21,23 @@ tar xf /root/godot.tar.gz --strip-components=1
 if [ "${CLASSICAL}" == "1" ]; then
   echo "Starting classical build for Windows..."
 
-  $SCONS platform=windows bits=64 $OPTIONS tools=yes target=release_debug
-  mkdir -p /root/out/x64/tools
-  cp -rvp bin/* /root/out/x64/tools
-  rm -rf bin
+  #$SCONS platform=windows bits=64 $OPTIONS tools=yes target=release_debug
+  #mkdir -p /root/out/x64/tools
+  #cp -rvp bin/* /root/out/x64/tools
+  #rm -rf bin
 
-  $SCONS platform=windows bits=64 $OPTIONS tools=no target=release_debug
+  #$SCONS platform=windows bits=64 $OPTIONS tools=no target=release_debug
   $SCONS platform=windows bits=64 $OPTIONS tools=no target=release
   mkdir -p /root/out/x64/templates
   cp -rvp bin/* /root/out/x64/templates
   rm -rf bin
 
-  $SCONS platform=windows bits=32 $OPTIONS tools=yes target=release_debug
-  mkdir -p /root/out/x86/tools
-  cp -rvp bin/* /root/out/x86/tools
-  rm -rf bin
+  #$SCONS platform=windows bits=32 $OPTIONS tools=yes target=release_debug
+  #mkdir -p /root/out/x86/tools
+  #cp -rvp bin/* /root/out/x86/tools
+  #rm -rf bin
 
-  $SCONS platform=windows bits=32 $OPTIONS tools=no target=release_debug
+  #$SCONS platform=windows bits=32 $OPTIONS tools=no target=release_debug
   $SCONS platform=windows bits=32 $OPTIONS tools=no target=release
   mkdir -p /root/out/x86/templates
   cp -rvp bin/* /root/out/x86/templates

@@ -22,19 +22,19 @@ tar xf /root/godot.tar.gz --strip-components=1
 if [ "${CLASSICAL}" == "1" ]; then
   echo "Starting classical build for macOS..."
 
-  $SCONS platform=osx $OPTIONS arch=x86_64 tools=yes target=release_debug
-  $SCONS platform=osx $OPTIONS arch=arm64 tools=yes target=release_debug
-  lipo -create bin/godot.osx.opt.tools.x86_64 bin/godot.osx.opt.tools.arm64 -output bin/godot.osx.opt.tools.universal
-  $STRIP bin/godot.osx.opt.tools.universal
+  #$SCONS platform=osx $OPTIONS arch=x86_64 tools=yes target=release_debug
+  #$SCONS platform=osx $OPTIONS arch=arm64 tools=yes target=release_debug
+  #lipo -create bin/godot.osx.opt.tools.x86_64 bin/godot.osx.opt.tools.arm64 -output bin/godot.osx.opt.tools.universal
+  #$STRIP bin/godot.osx.opt.tools.universal
 
-  mkdir -p /root/out/tools
-  cp -rvp bin/* /root/out/tools
-  rm -rf bin
+  #mkdir -p /root/out/tools
+  #cp -rvp bin/* /root/out/tools
+  #rm -rf bin
 
-  $SCONS platform=osx $OPTIONS arch=x86_64 tools=no target=release_debug
-  $SCONS platform=osx $OPTIONS arch=arm64 tools=no target=release_debug
-  lipo -create bin/godot.osx.opt.debug.x86_64 bin/godot.osx.opt.debug.arm64 -output bin/godot.osx.opt.debug.universal
-  $STRIP bin/godot.osx.opt.debug.universal
+  #$SCONS platform=osx $OPTIONS arch=x86_64 tools=no target=release_debug
+  #$SCONS platform=osx $OPTIONS arch=arm64 tools=no target=release_debug
+  #lipo -create bin/godot.osx.opt.debug.x86_64 bin/godot.osx.opt.debug.arm64 -output bin/godot.osx.opt.debug.universal
+  #$STRIP bin/godot.osx.opt.debug.universal
   $SCONS platform=osx $OPTIONS arch=x86_64 tools=no target=release
   $SCONS platform=osx $OPTIONS arch=arm64 tools=no target=release
   lipo -create bin/godot.osx.opt.x86_64 bin/godot.osx.opt.arm64 -output bin/godot.osx.opt.universal

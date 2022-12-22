@@ -169,69 +169,69 @@ if [ "${build_classical}" == "1" ]; then
   ## Linux (Classical) ##
 
   # Editor
-  binname="${godot_basename}_x11.64"
-  cp out/linux/x64/tools/godot.x11.opt.tools.64 ${binname}
-  strip ${binname}
-  zip -q -9 "${reldir}/${binname}.zip" ${binname}
-  rm ${binname}
+  #binname="${godot_basename}_x11.64"
+  #cp out/linux/x64/tools/godot.x11.opt.tools.64 ${binname}
+  #strip ${binname}
+  #zip -q -9 "${reldir}/${binname}.zip" ${binname}
+  #rm ${binname}
 
-  binname="${godot_basename}_x11.32"
-  cp out/linux/x86/tools/godot.x11.opt.tools.32 ${binname}
-  strip ${binname}
-  zip -q -9 "${reldir}/${binname}.zip" ${binname}
-  rm ${binname}
+  #binname="${godot_basename}_x11.32"
+  #cp out/linux/x86/tools/godot.x11.opt.tools.32 ${binname}
+  #strip ${binname}
+  #zip -q -9 "${reldir}/${binname}.zip" ${binname}
+  #rm ${binname}
 
   # Templates
   cp out/linux/x64/templates/godot.x11.opt.64 ${templatesdir}/linux_x11_64_release
-  cp out/linux/x64/templates/godot.x11.opt.debug.64 ${templatesdir}/linux_x11_64_debug
+  #cp out/linux/x64/templates/godot.x11.opt.debug.64 ${templatesdir}/linux_x11_64_debug
   cp out/linux/x86/templates/godot.x11.opt.32 ${templatesdir}/linux_x11_32_release
-  cp out/linux/x86/templates/godot.x11.opt.debug.32 ${templatesdir}/linux_x11_32_debug
+  #cp out/linux/x86/templates/godot.x11.opt.debug.32 ${templatesdir}/linux_x11_32_debug
   strip ${templatesdir}/linux_x11_*
 
   ## Windows (Classical) ##
 
   # Editor
-  binname="${godot_basename}_win64.exe"
-  batname="${godot_basename}_win64_console.cmd"
-  cp out/windows/x64/tools/godot.windows.opt.tools.64.exe ${binname}
-  strip ${binname}
-  sign_windows ${binname}
-  echo "@echo off" > ${batname}
-  echo ${binname} >> ${batname}
-  echo "pause > nul" >> ${batname}
-  zip -q -9 "${reldir}/${binname}.zip" ${binname} ${batname}
-  rm ${binname} ${batname}
+  #binname="${godot_basename}_win64.exe"
+  #batname="${godot_basename}_win64_console.cmd"
+  #cp out/windows/x64/tools/godot.windows.opt.tools.64.exe ${binname}
+  #strip ${binname}
+  #sign_windows ${binname}
+  #echo "@echo off" > ${batname}
+  #echo ${binname} >> ${batname}
+  #echo "pause > nul" >> ${batname}
+  #zip -q -9 "${reldir}/${binname}.zip" ${binname} ${batname}
+  #rm ${binname} ${batname}
 
-  binname="${godot_basename}_win32.exe"
-  batname="${godot_basename}_win32_console.cmd"
-  cp out/windows/x86/tools/godot.windows.opt.tools.32.exe ${binname}
-  strip ${binname}
-  sign_windows ${binname}
-  echo "@echo off" > ${batname}
-  echo ${binname} >> ${batname}
-  echo "pause > nul" >> ${batname}
-  zip -q -9 "${reldir}/${binname}.zip" ${binname} ${batname}
-  rm ${binname} ${batname}
+  #binname="${godot_basename}_win32.exe"
+  #batname="${godot_basename}_win32_console.cmd"
+  #cp out/windows/x86/tools/godot.windows.opt.tools.32.exe ${binname}
+  #strip ${binname}
+  #sign_windows ${binname}
+  #echo "@echo off" > ${batname}
+  #echo ${binname} >> ${batname}
+  #echo "pause > nul" >> ${batname}
+  #zip -q -9 "${reldir}/${binname}.zip" ${binname} ${batname}
+  #rm ${binname} ${batname}
 
   # Templates
   cp out/windows/x64/templates/godot.windows.opt.64.exe ${templatesdir}/windows_64_release.exe
-  cp out/windows/x64/templates/godot.windows.opt.debug.64.exe ${templatesdir}/windows_64_debug.exe
+  #cp out/windows/x64/templates/godot.windows.opt.debug.64.exe ${templatesdir}/windows_64_debug.exe
   cp out/windows/x86/templates/godot.windows.opt.32.exe ${templatesdir}/windows_32_release.exe
-  cp out/windows/x86/templates/godot.windows.opt.debug.32.exe ${templatesdir}/windows_32_debug.exe
+  #cp out/windows/x86/templates/godot.windows.opt.debug.32.exe ${templatesdir}/windows_32_debug.exe
   strip ${templatesdir}/windows*.exe
 
   ## OSX (Classical) ##
 
   # Editor
-  binname="${godot_basename}_osx.universal"
-  rm -rf Godot.app
-  cp -r git/misc/dist/osx_tools.app Godot.app
-  mkdir -p Godot.app/Contents/MacOS
-  cp out/macosx/tools/godot.osx.opt.tools.universal Godot.app/Contents/MacOS/Godot
-  chmod +x Godot.app/Contents/MacOS/Godot
-  zip -q -9 -r "${reldir}/${binname}.zip" Godot.app
-  rm -rf Godot.app
-  sign_macos ${reldir} ${binname} 0
+  #binname="${godot_basename}_osx.universal"
+  #rm -rf Godot.app
+  #cp -r git/misc/dist/osx_tools.app Godot.app
+  #mkdir -p Godot.app/Contents/MacOS
+  #cp out/macosx/tools/godot.osx.opt.tools.universal Godot.app/Contents/MacOS/Godot
+  #chmod +x Godot.app/Contents/MacOS/Godot
+  #zip -q -9 -r "${reldir}/${binname}.zip" Godot.app
+  #rm -rf Godot.app
+  #sign_macos ${reldir} ${binname} 0
 
   # Templates
   rm -rf osx_template.app
@@ -239,115 +239,18 @@ if [ "${build_classical}" == "1" ]; then
   mkdir -p osx_template.app/Contents/MacOS
 
   cp out/macosx/templates/godot.osx.opt.universal osx_template.app/Contents/MacOS/godot_osx_release.64
-  cp out/macosx/templates/godot.osx.opt.debug.universal osx_template.app/Contents/MacOS/godot_osx_debug.64
+  #cp out/macosx/templates/godot.osx.opt.debug.universal osx_template.app/Contents/MacOS/godot_osx_debug.64
   chmod +x osx_template.app/Contents/MacOS/godot_osx*
   zip -q -9 -r "${templatesdir}/osx.zip" osx_template.app
   rm -rf osx_template.app
-  sign_macos_template ${templatesdir} 0
-
-  ## Server (Classical) ##
-
-  # Headless (editor)
-  binname="${godot_basename}_linux_headless.64"
-  cp out/server/x64/tools/godot_server.x11.opt.tools.64 ${binname}
-  strip ${binname}
-  zip -q -9 "${reldir}/${binname}.zip" ${binname}
-  rm ${binname}
-
-  # Server (template)
-  binname="${godot_basename}_linux_server.64"
-  cp out/server/x64/templates/godot_server.x11.opt.64 ${binname}
-  strip ${binname}
-  zip -q -9 "${reldir}/${binname}.zip" ${binname}
-  rm ${binname}
-
-  ## Javascript (Classical) ##
-
-  # Editor
-  unzip out/javascript/tools/godot.javascript.opt.tools.threads.zip -d ${webdir}/
-  brotli --keep --force --quality=11 ${webdir}/*
-  binname="${godot_basename}_web_editor.zip"
-  cp out/javascript/tools/godot.javascript.opt.tools.threads.zip ${reldir}/${binname}
-
-  # Templates
-  cp out/javascript/templates/godot.javascript.opt.zip ${templatesdir}/webassembly_release.zip
-  cp out/javascript/templates/godot.javascript.opt.debug.zip ${templatesdir}/webassembly_debug.zip
-
-  cp out/javascript/templates/godot.javascript.opt.threads.zip ${templatesdir}/webassembly_threads_release.zip
-  cp out/javascript/templates/godot.javascript.opt.debug.threads.zip ${templatesdir}/webassembly_threads_debug.zip
-
-  cp out/javascript/templates/godot.javascript.opt.gdnative.zip ${templatesdir}/webassembly_gdnative_release.zip
-  cp out/javascript/templates/godot.javascript.opt.debug.gdnative.zip ${templatesdir}/webassembly_gdnative_debug.zip
-
-  ## Android (Classical) ##
-
-  # Lib for direct download
-  cp out/android/templates/godot-lib.release.aar ${reldir}/godot-lib.${templates_version}.release.aar
-
-  # Editor
-  binname="${godot_basename}_android_editor.apk"
-  cp out/android/tools/android_editor.apk ${reldir}/${binname}
-
-  # Templates
-  cp out/android/templates/*.apk ${templatesdir}/
-  cp out/android/templates/android_source.zip ${templatesdir}/
-
-  ## iOS (Classical) ##
-
-  rm -rf ios_xcode
-  cp -r git/misc/dist/ios_xcode ios_xcode
-  cp out/ios/templates/libgodot.iphone.simulator.a ios_xcode/libgodot.iphone.release.xcframework/ios-arm64_x86_64-simulator/libgodot.a
-  cp out/ios/templates/libgodot.iphone.debug.simulator.a ios_xcode/libgodot.iphone.debug.xcframework/ios-arm64_x86_64-simulator/libgodot.a
-  cp out/ios/templates/libgodot.iphone.a ios_xcode/libgodot.iphone.release.xcframework/ios-arm64/libgodot.a
-  cp out/ios/templates/libgodot.iphone.debug.a ios_xcode/libgodot.iphone.debug.xcframework/ios-arm64/libgodot.a
-  cd ios_xcode
-  zip -q -9 -r "${templatesdir}/iphone.zip" *
-  cd ..
-  rm -rf ios_xcode
-
-  ## UWP (Classical) ##
-
-  if [ ! -d "deps/angle" ]; then
-    echo "Downloading ANGLE binaries from https://github.com/GodotBuilder/godot-builds/releases/tag/_tools"
-    mkdir -p deps && cd deps
-    curl -LO https://github.com/GodotBuilder/godot-builds/releases/download/_tools/angle.7z
-    7z x angle.7z && rm -f angle.7z
-    cd ..
-  fi
-
-  rm -rf uwp_template_*
-  for arch in ARM Win32 x64; do
-    cp -r git/misc/dist/uwp_template uwp_template_${arch}
-    cp deps/angle/winrt/10/src/Release_${arch}/libEGL.dll \
-      deps/angle/winrt/10/src/Release_${arch}/libGLESv2.dll \
-      uwp_template_${arch}/
-    cp -r uwp_template_${arch} uwp_template_${arch}_debug
-  done
-
-  cp out/uwp/arm/godot.uwp.opt.32.arm.exe uwp_template_ARM/godot.uwp.exe
-  cp out/uwp/arm/godot.uwp.opt.debug.32.arm.exe uwp_template_ARM_debug/godot.uwp.exe
-  cd uwp_template_ARM && zip -q -9 -r "${templatesdir}/uwp_arm_release.zip" * && cd ..
-  cd uwp_template_ARM_debug && zip -q -9 -r "${templatesdir}/uwp_arm_debug.zip" * && cd ..
-  rm -rf uwp_template_ARM*
-
-  cp out/uwp/x86/godot.uwp.opt.32.x86.exe uwp_template_Win32/godot.uwp.exe
-  cp out/uwp/x86/godot.uwp.opt.debug.32.x86.exe uwp_template_Win32_debug/godot.uwp.exe
-  cd uwp_template_Win32 && zip -q -9 -r "${templatesdir}/uwp_x86_release.zip" * && cd ..
-  cd uwp_template_Win32_debug && zip -q -9 -r "${templatesdir}/uwp_x86_debug.zip" * && cd ..
-  rm -rf uwp_template_Win32*
-
-  cp out/uwp/x64/godot.uwp.opt.64.x64.exe uwp_template_x64/godot.uwp.exe
-  cp out/uwp/x64/godot.uwp.opt.debug.64.x64.exe uwp_template_x64_debug/godot.uwp.exe
-  cd uwp_template_x64 && zip -q -9 -r "${templatesdir}/uwp_x64_release.zip" * && cd ..
-  cd uwp_template_x64_debug && zip -q -9 -r "${templatesdir}/uwp_x64_debug.zip" * && cd ..
-  rm -rf uwp_template_x64*
+  #sign_macos_template ${templatesdir} 0
 
   ## Templates TPZ (Classical) ##
 
   echo "${templates_version}" > ${templatesdir}/version.txt
-  pushd ${templatesdir}/..
-  zip -q -9 -r -D "${reldir}/${godot_basename}_export_templates.tpz" templates/*
-  popd
+  #pushd ${templatesdir}/..
+  #zip -q -9 -r -D "${reldir}/${godot_basename}_export_templates.tpz" templates/*
+  #popd
 
   ## SHA-512 sums (Classical) ##
 

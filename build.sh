@@ -149,6 +149,7 @@ if [ "${skip_git_checkout}" == 0 ]; then
   git clone https://github.com/drwhut/godot git || /bin/true
   pushd git
   git checkout -b ${git_treeish} origin/${git_treeish} || git checkout ${git_treeish}
+  git submodule update --init --recursive
   git reset --hard
   git clean -fdx
   git pull origin ${git_treeish} || /bin/true
@@ -168,7 +169,8 @@ EOF
     exit 1
   fi
 
-  sh misc/scripts/make_tarball.sh -v ${godot_version} -g ${git_treeish}
+  #sh misc/scripts/make_tarball.sh -v ${godot_version} -g ${git_treeish}
+  tar -czf ../godot-${godot_version}.tar.gz .
   popd
 fi
 

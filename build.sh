@@ -179,7 +179,7 @@ mkdir -p ${basedir}/out
 mkdir -p ${basedir}/out/logs
 
 export podman_run="${podman} run -it --rm --env BUILD_NAME --env GODOT_VERSION_STATUS --env NUM_CORES --env CLASSICAL=${build_classical} --env MONO=${build_mono} -v ${basedir}/godot-${godot_version}.tar.gz:/root/godot.tar.gz -w /root/"
-export img_version=3.x-f36-mono-6.12.0.182
+export img_version=3.x-f36-mono-6.12.0.198
 
 mkdir -p ${basedir}/out/windows
 ${podman_run} -v ${basedir}/build-windows:/root/build -v ${basedir}/out/windows:/root/out localhost/godot-windows:${img_version} bash build/build.sh 2>&1 | tee ${basedir}/out/logs/windows

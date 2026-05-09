@@ -160,9 +160,10 @@ if [ ! -d "deps/keystore" ]; then
 fi
 
 if [ "${skip_git_checkout}" == 0 ]; then
-  git clone https://github.com/godotengine/godot git || /bin/true
+  git clone https://github.com/drwhut/godot git || /bin/true
   pushd git
   git checkout -b ${git_treeish} origin/${git_treeish} || git checkout ${git_treeish}
+  git submodule update --init --recursive
   git reset --hard
   git clean -fdx
   git pull origin ${git_treeish} || /bin/true
@@ -182,19 +183,13 @@ EOF
     exit 1
   fi
 
-  sh misc/scripts/make_tarball.sh -v ${godot_version} -g ${git_treeish}
+  #sh misc/scripts/make_tarball.sh -v ${godot_version} -g ${git_treeish}
+  tar -czf ../godot-${godot_version}.tar.gz .
   popd
 fi
 
-export podman_run="${podman} run -it --rm --env BUILD_NAME=${BUILD_NAME} --env GODOT_VERSION_STATUS=${GODOT_VERSION_STATUS} --env NUM_CORES=${NUM_CORES} --env CLASSICAL=${build_classical} --env MONO=${build_mono} -v ${basedir}/godot-${godot_version}.tar.gz:/root/godot.tar.gz -v ${basedir}/mono-glue:/root/mono-glue -w /root/"
+export podman_run="${podman} run -it --rm --env BUILD_NAME=${BUILD_NAME} --env GODOT_VERSION_STATUS=${GODOT_VERSION_STATUS} --env NUM_CORES=${NUM_CORES} --env CLASSICAL=${build_classical} --env MONO=${build_mono} -v ${basedir}/godot-${godot_version}.tar.gz:/root/godot.tar.gz -w /root/"
 export img_version=$IMAGE_VERSION
-
-# Get AOT compilers from their containers.
-mkdir -p ${basedir}/out/aot-compilers
-${podman} run -it --rm -w /root -v ${basedir}/out/aot-compilers:/root/out localhost/godot-ios:${img_version} bash -c "cp -r /root/aot-compilers/* /root/out && chmod +x /root/out/*/*"
-
-mkdir -p ${basedir}/mono-glue
-${podman_run} -v ${basedir}/build-mono-glue:/root/build localhost/godot-mono-glue:${img_version} bash build/build.sh 2>&1 | tee ${basedir}/out/logs/mono-glue
 
 mkdir -p ${basedir}/out/windows
 ${podman_run} -v ${basedir}/build-windows:/root/build -v ${basedir}/out/windows:/root/out localhost/godot-windows:${img_version} bash build/build.sh 2>&1 | tee ${basedir}/out/logs/windows
@@ -202,25 +197,8 @@ ${podman_run} -v ${basedir}/build-windows:/root/build -v ${basedir}/out/windows:
 mkdir -p ${basedir}/out/linux
 ${podman_run} -v ${basedir}/build-linux:/root/build -v ${basedir}/out/linux:/root/out localhost/godot-linux:${img_version} bash build/build.sh 2>&1 | tee ${basedir}/out/logs/linux
 
-mkdir -p ${basedir}/out/javascript
-${podman_run} -v ${basedir}/build-javascript:/root/build -v ${basedir}/out/javascript:/root/out localhost/godot-javascript:${img_version} bash build/build.sh 2>&1 | tee ${basedir}/out/logs/javascript
-
 mkdir -p ${basedir}/out/macosx
 ${podman_run} -v ${basedir}/build-macosx:/root/build -v ${basedir}/out/macosx:/root/out localhost/godot-osx:${img_version} bash build/build.sh 2>&1 | tee ${basedir}/out/logs/macosx
-
-mkdir -p ${basedir}/out/android
-${podman_run} -v ${basedir}/build-android:/root/build -v ${basedir}/out/android:/root/out -v ${basedir}/deps/keystore:/root/keystore localhost/godot-android:${img_version} bash build/build.sh 2>&1 | tee ${basedir}/out/logs/android
-
-mkdir -p ${basedir}/out/ios
-${podman_run} -v ${basedir}/build-ios:/root/build -v ${basedir}/out/ios:/root/out localhost/godot-ios:${img_version} bash build/build.sh 2>&1 | tee ${basedir}/out/logs/ios
-
-mkdir -p ${basedir}/out/server
-${podman_run} -v ${basedir}/build-server:/root/build -v ${basedir}/out/server:/root/out localhost/godot-linux:${img_version} bash build/build.sh 2>&1 | tee ${basedir}/out/logs/server
-
-if [ "${build_uwp}" == "1" ]; then
-  mkdir -p ${basedir}/out/uwp
-  ${podman_run} --ulimit nofile=32768:32768 -v ${basedir}/build-uwp:/root/build -v ${basedir}/out/uwp:/root/out ${registry}/godot-private/uwp:latest bash build/build.sh 2>&1 | tee ${basedir}/out/logs/uwp
-fi
 
 uid=$(id -un)
 gid=$(id -gn)
